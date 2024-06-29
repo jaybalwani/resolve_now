@@ -1,17 +1,11 @@
-<!-- grievances/templates/grievances/grievance_list.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Grievance List</title>
-</head>
-<body>
-    <h1>Grievance List</h1>
-    <ul>
-        {% for grievance in grievances %}
-            <li>
-                <a href="{% url 'grievance_detail' grievance.pk %}">{{ grievance.type }} - {{ grievance.status }}</a>
-            </li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends 'main.html' %}
+{% block content %}
+<h1>Grievance List</h1>
+<ul>
+    {% for grievance in grievances %}
+        <li>
+            <a href="{% url 'grievance_detail' grievance.pk %}">{{ grievance.type }} - {{ grievance.status }}</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

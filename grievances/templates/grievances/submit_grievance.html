@@ -1,15 +1,10 @@
-<!-- grievances/templates/grievances/submit_grievance.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Submit Grievance</title>
-</head>
-<body>
-    <h1>Submit Grievance</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
-    </form>
-</body>
-</html>
+{% extends 'main.html' %}
+{% block content %}
+<h1>Submit Grievance</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}
+
