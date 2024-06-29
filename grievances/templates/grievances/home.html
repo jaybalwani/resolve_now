@@ -1,9 +1,23 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<h1>HOME</h1>
+<h1>Welcome to the Grievance Support System</h1>
+<ul>
+    {% if request.user.is_authenticated %}
+        {% if request.user.role == 'employee' %}
+            <li><a href="{% url 'submit_grievance' %}">Submit Grievance</a></li>
+            <li><a href="{% url 'grievance_list' %}">My Grievances</a></li>
+        {% elif request.user.role == 'hr' %}
+            <li><a href="{% url 'grievance_list' %}">All Grievances</a></li>
+        {% elif request.user.role == 'admin' %}
+            <li><a href="{% url 'admin_dashboard' %}">Admin Dashboard</a></li>
+            <li><a href="{% url 'grievance_list' %}">All Grievances</a></li>
+        {% endif %}
+    {% endif %}
+</ul>
+<!-- <h1>HOME</h1>
 <h3><a href="{% url 'register' %}">Register</a></h3>
 <h3><a href="{% url 'submit_grievance' %}">Submit Grievance</a></h3>
-<h3><a href="{% url 'grievance_list' %}">Grievance List </a></h3>
+<h3><a href="{% url 'grievance_list' %}">Grievance List </a></h3> -->
 {% endblock %}
 

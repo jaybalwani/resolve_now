@@ -10,4 +10,6 @@ urlpatterns = [
     path('grievance_list/', views.grievance_list, name='grievance_list'),
     path('', views.home, name='home'),
     path('<int:pk>/', views.grievance_detail, name='grievance_detail'),
+    path('admin_dashboard/', views.admin_dashboard, name='admin_dashboard'),
+
 ]
