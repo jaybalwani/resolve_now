@@ -8,9 +8,8 @@ git clone https://github.com/jaybalwani/resolve_now.git
 
 cd grievance_system
 
---> Create a virtual environment :
-
 # Let's install virtualenv first
+--> Create a virtual environment :
 pip install virtualenv
 
 # Then we create our virtual environment
