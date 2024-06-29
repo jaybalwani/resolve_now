@@ -1,0 +1,25 @@
+<!-- grievances/templates/grievances/grievance_detail.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grievance Detail</title>
+</head>
+<body>
+    <h1>{{ grievance.type }}</h1>
+    <p>{{ grievance.description }}</p>
+    <p>Department: {{ grievance.department }}</p>
+    <p>Severity: {{ grievance.severity }}</p>
+    <p>Status: {{ grievance.status }}</p>
+    <h2>Messages</h2>
+    <ul>
+        {% for message in messages %}
+            <li>{{ message.user.username }}: {{ message.message }}</li>
+        {% endfor %}
+    </ul>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Send Message</button>
+    </form>
+</body>
+</html>
