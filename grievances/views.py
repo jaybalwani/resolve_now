@@ -31,12 +31,10 @@ def submit_grievance(request):
 
 @login_required
 def grievance_list(request):
-    if request.user.role == User.ADMIN:
-        grievances = Grievance.objects.all()
-    elif request.user.role == User.HR:
-        grievances = Grievance.objects.filter(department=request.user.department)
-    else:
+    if request.user.role == User.EMPLOYEE:
         grievances = Grievance.objects.filter(user=request.user)
+    else:
+        grievances = Grievance.objects.all()
     return render(request, 'grievances/grievance_list.html', {'grievances': grievances})
 
 @login_required
