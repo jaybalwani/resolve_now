@@ -4,6 +4,7 @@
 <h1>Welcome to the Grievance Support System</h1>
 <ul>
     {% if request.user.is_authenticated %}
+        <h2>Hello there, {{request.user.username}}</h2>
         {% if request.user.role == 'employee' %}
             <li><a href="{% url 'submit_grievance' %}">Submit Grievance</a></li>
             <li><a href="{% url 'grievance_list' %}">My Grievances</a></li>

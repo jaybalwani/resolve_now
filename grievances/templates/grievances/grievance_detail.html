@@ -17,5 +17,14 @@
     {{ form.as_p }}
     <button type="submit">Send Message</button>
 </form>
+
+{% if request.user.role == 'hr' or request.user.role == 'admin' %}
+        <h2>Admin Actions</h2>
+        <form method="post" onsubmit="return confirm('Are you sure you want to delete this grievance?');">
+            {% csrf_token %}
+            <button type="submit" name="delete_grievance">Delete Grievance</button>
+        </form>
+ {% endif %}
+
 {% endblock %}
 

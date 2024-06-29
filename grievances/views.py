@@ -6,6 +6,9 @@ from .forms import UserRegistrationForm, GrievanceForm, MessageForm
 def is_admin(user):
     return user.role == User.ADMIN
 
+def is_hr_or_admin(user):
+    return user.role == User.ADMIN or user.role == User.HR
+
 def home(request):
     return render(request, 'grievances/home.html')
 
@@ -45,13 +48,17 @@ def grievance_detail(request, pk):
     grievance = get_object_or_404(Grievance, pk=pk)
     messages = grievance.messages.all()
     if request.method == 'POST':
-        form = MessageForm(request.POST)
-        if form.is_valid():
-            message = form.save(commit=False)
-            message.grievance = grievance
-            message.user = request.user
-            message.save()
-            return redirect('grievance_detail', pk=pk)
+        if 'message' in request.POST:
+            form = MessageForm(request.POST)
+            if form.is_valid():
+                message = form.save(commit=False)
+                message.grievance = grievance
+                message.user = request.user
+                message.save()
+                return redirect('grievance_detail', pk=pk)
+        elif 'delete_grievance' in request.POST and is_hr_or_admin(request.user):
+            grievance.delete()
+            return redirect('grievance_list')
     else:
         form = MessageForm()
     return render(request, 'grievances/grievance_detail.html', {'grievance': grievance, 'messages': messages, 'form': form})
