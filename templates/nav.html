@@ -1,4 +1,8 @@
 <a href="{% url 'home' %}">
     <h1>LOGO</h1>
-    <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'login' %}"><button type="submit">login</button></a>
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">logout</button>
+    </form>
 </a>
